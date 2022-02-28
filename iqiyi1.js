@@ -90,7 +90,7 @@ var $nobyda = nobyda();
 	if (typeof process !== 'undefined' && typeof process.env !== 'undefined') {
 		cookie = cookie || process.env.IQIYI1_COOKIE;
 		LogDetails = LogDetails || process.env.IQIYI_DEBUG;
-		barkKey = barkKey || process.env.BARK_PUSE;
+		barkKey = barkKey || process.env.BARK1;
 		barkServer = barkServer || process.env.BARK_SERVER;
 	}
   if ($nobyda.isRequest) {

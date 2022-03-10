@@ -290,7 +290,7 @@ def main_handler(event, context):
     start()
 
 cookies = ""
-step = 25000
+step = 45000
 # 获取小米账号
 if "xm_user_password" in os.environ:
     if len(os.environ["xm_user_password"]) > 1:

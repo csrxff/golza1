@@ -16,7 +16,7 @@ Safari浏览器打开 https://m.iqiyi.com/user.html 使用密码登录, 如通�
 Node.js环境变量相关：
 Cookie：IQIYI_COOKIE
 Debug调试：IQIYI_DEBUG
-Bark通知推送Key：BARK_PUSH
+Bark通知推送Key：BARK_PUSE
 Bark服务端(默认官方)：BARK_SERVER
 
 JsBox, Node.js用户获取Cookie说明：
@@ -90,7 +90,7 @@ var $nobyda = nobyda();
 	if (typeof process !== 'undefined' && typeof process.env !== 'undefined') {
 		cookie = cookie || process.env.IQIYI_COOKIE;
 		LogDetails = LogDetails || process.env.IQIYI_DEBUG;
-		barkKey = barkKey || process.env.BARK_PUSH;
+		barkKey = barkKey || process.env.BARK_PUSE;
 		barkServer = barkServer || process.env.BARK_SERVER;
 	}
   if ($nobyda.isRequest) {

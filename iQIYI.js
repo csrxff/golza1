@@ -1,7 +1,7 @@
 /*
 爱奇艺会员签到脚本
 
-更新时间: 2022.2.7
+更新时间: 2022.06.18
 脚本兼容: QuantumultX, Surge4, Loon, JsBox, Node.js
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
@@ -16,7 +16,7 @@ Safari浏览器打开 https://m.iqiyi.com/user.html 使用密码登录, 如通�
 Node.js环境变量相关：
 Cookie：IQIYI_COOKIE
 Debug调试：IQIYI_DEBUG
-Bark通知推送Key：BARK_PUSE
+Bark通知推送Key：BARK_PUSH
 Bark服务端(默认官方)：BARK_SERVER
 
 JsBox, Node.js用户获取Cookie说明：
@@ -40,7 +40,7 @@ QuantumultX 远程脚本配置:
 
 [rewrite_local]
 # 获取Cookie
-^https:\/\/passport\.iqiyi\.com\/apis\/user\/info\.action url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+^https:\/\/passport\.iqiyi\.com\/apis\/user\/ url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
 [mitm]
 hostname= passport.iqiyi.com
@@ -51,7 +51,7 @@ Surge 4.2.0+ 脚本配置:
 [Script]
 爱奇艺签到 = type=cron,cronexp=0 9 * * *,timeout=120,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
-爱奇艺获取Cookie = type=http-request,pattern=^https:\/\/passport\.iqiyi\.com\/apis\/user\/info\.action,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+爱奇艺获取Cookie = type=http-request,pattern=^https:\/\/passport\.iqiyi\.com\/apis\/user\/,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
 [MITM]
 hostname= passport.iqiyi.com
@@ -65,7 +65,7 @@ Loon 2.1.0+ 脚本配置:
 cron "0 9 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
 # 获取Cookie
-http-request ^https:\/\/passport\.iqiyi\.com\/apis\/user\/info\.action script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+http-request ^https:\/\/passport\.iqiyi\.com\/apis\/user\/ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
 [Mitm]
 hostname= passport.iqiyi.com
@@ -90,7 +90,7 @@ var $nobyda = nobyda();
 	if (typeof process !== 'undefined' && typeof process.env !== 'undefined') {
 		cookie = cookie || process.env.IQIYI_COOKIE;
 		LogDetails = LogDetails || process.env.IQIYI_DEBUG;
-		barkKey = barkKey || process.env.BARK_PUSE;
+		barkKey = barkKey || process.env.BARK_PUSH;
 		barkServer = barkServer || process.env.BARK_SERVER;
 	}
   if ($nobyda.isRequest) {
@@ -412,11 +412,11 @@ function getTaskRewards(task) {
 }
 
 function GetCookie() {
-  if (!$request.url.includes("/apis/user/info.action")) {
+  if (!$request.url.includes("iqiyi.com")) {
     $nobyda.notify(`写入爱奇艺Cookie失败`, "", "请更新脚本配置(URL正则/MITM)");
     return
   }
-  var CKA = $request.headers['Cookie'];
+  var CKA = $request.headers['Cookie'] || $request.headers['cookie'];;
   var iQIYI = CKA && CKA.includes("P00001=") && CKA.includes("P00003=") && CKA;
   var RA = $nobyda.read("CookieQY")
   if (CKA && iQIYI) {

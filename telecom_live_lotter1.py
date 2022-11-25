@@ -24,7 +24,7 @@ from asyncio import wait, sleep, run
 
 from tools.tool import timestamp, get_environ, print_now
 from tools.send_msg import push
-from china_telecom import ChinaTelecom
+from china_telecom1 import ChinaTelecom
 
 class TelecomLotter:
     def __init__(self, phone, password):

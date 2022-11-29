@@ -197,8 +197,9 @@ def get_data():
         body = data["data"]
         for i in body:
             if time.strftime('%Y-%m-%d') in i['start_time']:
-                print(i['start_time'])
-                all_list.append(i)
+                if i not in all_list: 
+                    print(i['start_time'], i['nickname'], i['liveId']) 
+                    all_list.append(i)
         code += 1
     list = {}
     f = 1
